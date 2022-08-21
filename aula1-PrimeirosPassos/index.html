@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aulas de Jquery</title>
+</head>
+<body>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto deleniti excepturi enim beatae culpa quo delectus facere voluptatum labore officiis laborum magnam rem officia molestias debitis explicabo, expedita odio non!</p>
+    <p id="teste">Isso é um paragrafo de teste</p>
+    <p class="p-yellow">Outro paragrafo</p>
+
+    <input type="text" name="texto" id="cop">
+
+    <hr>
+    <button id="botão" style="padding: 20px;">Clique aqui</button>
+
+    <script src="../js/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#botão').click(function(){
+                alert('clicou');
+                $('p').hide();
+            })
+
+            $('#botão').hover(function(){
+                $(this).text('Entrou o mouse');
+            },
+                function(){
+                    $(this).text('Saiu o mouse');
+                }
+            )
+
+            $('#cop').focus(function(){
+                $(this).css('background-color', 'yellow')
+            })
+        });
+    </script>
+</body>
+</html>
