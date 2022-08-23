@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.red,.blue,.green{
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .red{
+            background-color: red;
+        }
+
+        .blue{
+            background-color: blue;
+        }
+
+        .green{
+            background-color: green;
+        }
+
+        #flip, #panel{
+            padding: 5px;
+            text-align: center;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+        }
+
+        #panel{
+            display: none;
+            padding: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="flip">Clique aqui para aparecer o painel</div>
+    <div id="panel">Painel oculto</div>
+
+    <div class="red">Div red</div>
+    <div class="blue">div blue</div>
+    <div class="green">div green</div>
+    <!--
+    <button id="botãoHide">Ocultar</button>
+    <button id="botãoShow">Mostrar</button>
+    -->
+    <p><button id="botão">Clique aqui</button></p>
+    
+    <script src="../js/jquery-3.6.0.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

@@ -19,23 +19,42 @@
     <script src="../js/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function(){
-            $('#botão').click(function(){
-                alert('clicou');
-                $('p').hide();
+            $('#teste').click(function(){
+                $(this).html('clicou')
+                $('.p-yellow').hide();
             })
 
             $('#botão').hover(function(){
-                $(this).text('Entrou o mouse');
+                $(this).css('color', 'blue');
+                $(this).css('background', 'red');
+                $(this).html('entrou');
             },
                 function(){
-                    $(this).text('Saiu o mouse');
+                    $(this).css('color', 'black');
+                    $(this).css('background', '#C0C0C0')
+                    $(this).html('clique aqui');
+
+                }
+            );
+
+            $('#cop').focus(function(){
+                $(this).css('background', 'red');
+            })
+
+            $('cop').blur(function(){
+                $(this).css('background', 'white')
+            })
+            
+            $('#cop').hover(function(){
+                $(this).css('border-color', 'red')
+            },
+                function(){
+                    $(this).css('border-color', 'black')
                 }
             )
 
-            $('#cop').focus(function(){
-                $(this).css('background-color', 'yellow')
-            })
-        });
+
+        })
     </script>
 </body>
 </html>
