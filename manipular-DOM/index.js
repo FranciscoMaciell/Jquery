@@ -1,80 +1,94 @@
 $(document).ready(function(){
-    //var paragrafo=$('p').text()
-    //alert(paragrafo)
+    // PEGAR O SELETO H1
+
+    //var textH1=$('h1').html();
+    //alert(textH1);
 
 
-    $('#c_text').blur(function(){
-        //var texto=$(this).val();
-        //alert(texto)
+    // PEGAR O SELETOR P
+    var textP=$('p').text();
+    //alert(textP);
+
+    $('#texto').blur(function(){
+        var valor=$(this).val();
+        //alert(valor);
     })
 
-    $('#botão10').click(function(){
-        //var valor=$('#link').attr('href');
-        //alert(`O valor é ${valor}`);
-    })
-
-    $('#botão').click(function(){
-        //var val=$('img').attr('src');
-        //alert(`O link é da imagem é ${val}`);
-    })
-
-    // ATRIBUIR VALORES 
-
+    // PEGANDO LINKS
     $('#botão1').click(function(){
-        //$('h1').text('Manipulado com jQuery')
-        //$('h1').append('<br>Adicionei este testo com <i>jQuery</i>')
-        $('body').prepend('<div style="width: 100px; height: 100px; display: inline-block; background: red; margin: 2px"></div>')
-    })
-
-    $('#botão2').click(function(){
-        $('h2').html('<b>Manipulado</b> com <i>jQuery</>')
-    })
-
-    $('#botão3').click(function(){
-        $('#c_text').val('Dimitri Teixeira')
-    })
-
-    $('#botão4').click(function(){
-        $('#link').text('Ir para programação web')
-        $('#link').attr('href', 'https://programacaoweb.com.br')
-    })
-
-    $('#botão5').click(function(){
-        $('img').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUrpeqdGxcdpZzd9Jwujs0eHikKIr5y9EuYwfeeEu4wv3Ig3bYuqvIN0-9vk4A66A5Zck&usqp=CAU')
-    })
-
-    // REMOVER ITENS DA PAGINA
-
-    $('#botão6').click(function(){
-        $('h1').remove();
-    })
-
-    $('#botão7').click(function(){
-        $('#teste').empty();
+        $('#link').css('color', 'red')
+        var link=$('#link').attr('href');
+        alert(`O link vai para ${link}`);
     })
 
     $('#botão8').click(function(){
-        //$('h1').css('color', 'blue')
-        //$('body').css('background', 'yellow')
-        $('#link').addClass('red');
+        $('h1').append('<br>texto inserido com append')
     })
 
     $('#botão9').click(function(){
-        $('#link').removeClass('red')
+        $('h1').prepend('texto inserido com prepend<br>')
+    })
+
+    $('#botão2').click(function(){
+        var ima=$('#imag').attr('src');
+        alert(`O link da imagem é ${ima}`);
+    })
+
+    $('#botão3').click(function(){
+        $('h1').html('Texto alterado com <i>jQuery</i>');
+    })
+
+    $('#botão4').click(function(){
+        $('h2').text('Mudei o h2 com jQuery');
+    })
+
+    $('#botão5').click(function(){
+        $('#texto').val('Dimitri');
+    })
+
+    $('#botão6').click(function(){
+        $('#link').text('Link para programação web')
+        $('#link').attr('href', 'https://programacaoweb.com.br')
+    })
+
+    $('#botão7').click(function(){
+        $('#imag').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRve76pqYmnpmje5YlmKk36Dhl6rGLHDorRIT-NCQesCRRIvpydoSIrWqAbarnEJIVSYIw&usqp=CAU')
     })
 
     $('#botão10').click(function(){
-        $('#link').toggleClass('red')
+        $('body').prepend('<div style="width: 100px; height: 100px; display: inline-block; background: red; margin: 2px"></div>')
     })
 
+
+    // REMOVENDO ITENS DA PAGINA
     $('#botão11').click(function(){
-        var largura=$('img').width();
-        var altura=$('img').height();
-        alert(`O tamanho da imagem é ${largura} x ${altura}`);
+        $('h1').remove();
     })
 
     $('#botão12').click(function(){
-        $('img').width('512')
-        $('img').height('512')
+        $('#texte1').empty();
+    })
+
+    $('#botão13').click(function(){
+        $('body').css('background', 'blue');
+        $('h1').css('color', 'white');
+    })
+
+    $('#botão14').click(function(){
+        $('body').addClass('red');
+    })
+
+    $('#botão15').click(function(){
+        $('body').removeClass('red');
+    })
+
+    $('#botão16').click(function(){
+        $('body').toggleClass('red');
+    })
+
+    $('#botão17').click(function(){
+        var largura=$('#imag').width();
+        var altura=$('#imag').height();
+        alert(`O tamanho da imagem é ${largura} x ${altura}`)
     })
 })

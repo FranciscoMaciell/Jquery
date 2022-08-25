@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Conhecendo as requisições AJAX</title>
     <style>
         body{
             text-align: center;
@@ -13,20 +12,22 @@
     </style>
 </head>
 <body>
-
-    <h1>Conhecendo o Ajax</h1>
-
-    <div id="teste">
+    <h1>Conhecendo o AJAX</h1>
+    <div id="texte">
         <p>Um conteudo inicial</p>
-    </div><br>
+    </div>
 
-    <button id="botão">Clique aqui</button>
-    <hr>
-    <br><br>
+    <input type="text"  id="cep" placeholder="Digite seu CEP"><br><br>
 
-    <input type="text" name="" placeholder="digite seu cep" id="cep"><br><br>
-    <input type="text" name="" placeholder="digite sua Cidade" id="cit"><br><br>
-    <input type="text" name="" placeholder="digite seu UF" id="uf"><br><br>
+    <button id="botão">Clique aqui</button><br><br>
+
+    <label for="cidade">CIDADE:</label>
+    <input type="text" id="cidade"><br><br>
+    <label for="uf">UF:</label>
+    <input type="text" id="uf"><br><br>
+
+    <div id="cidade"></div><br>
+    <div id="uf"></div><br>
 
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="index.js"></script>

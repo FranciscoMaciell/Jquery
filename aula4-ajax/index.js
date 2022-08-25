@@ -1,39 +1,40 @@
 $(document).ready(function(){
-    // CARREGAR ARQUIVOS EXTERNOS
-    $('#botão').click(function(){
-        $('#teste').load('teste.txt')
-    })
+   // $('#botão').click(function(){
+        //$('#texte').load('teste.txt')
+   // })
 
-    $('h1').click(function(){
-        $('#teste').load('teste.txt')
+    $('h1').mouseover(function(){
+        //$('#texte').load('teste.txt')
     })
     /*
-    // METODO GET PARA PEGAR INFORMAÇÃO DE UMA PAGINA
-    $('#cep').blur(function(){
-        var valor=$(this).val();
+    $('#botão').click(function(){
+        var valor=$('#cep').val();
         $.get(`https://viacep.com.br/ws/${valor}/json/`, function(dados, status){
             if(status=='success'){
-                $('#cit').val(dados.localidade);
-                $('#uf').val(dados.uf)
+                $('#cidade').html(`O nome da cidade é ${dados.localidade} e a UF é ${dados.uf}`);
             }else{
-                alert('Houve um problema na requisição')
+                alert('[ERRO], dados inesistentes');
             }
         })
     })
     */
-    // METODO POST PARA PEGAR INFORMAÇÃO DE UMA PAGINA
-    $('#cep').blur(function(){
-        var valor=$(this).val();
-        $.ajax({
-            url:`https://viacep.com.br/ws/${valor}/json/`,
-            type:"GET",
-            success: function(dados, status){
-                $('#cit').val(dados.localidade)
-                $('#uf').val(dados.uf)
-            },
-            error: function(){
-                alert('Deu erro na requisição')
-            }
-        })
-    })
-})
+    $('#botão').click(function(){
+        var valor=$('#cep').val();
+        if(valor.length!=8){
+            alert('[ERROR], digite os dados novamente');
+        }else{
+            $.ajax({
+                url:`https://viacep.com.br/ws/${valor}/json/`,
+                type:'GET',
+                success: function(dados, status){
+                    $('#cidade').val(dados.localidade);
+                    $('#uf').val(dados.uf);
+                    $('#cidade').html(`O nome da cidade é ${dados.localidade} e a UF é ${dados.uf}`);
+                },
+                error: function(){
+                    alert('[ERRO], dados inesistentes');
+                }
+            })
+        }
+   })
+});
