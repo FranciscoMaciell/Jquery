@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            margin-left: 10%;
+        }
+        
+        th, td{
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+        }
+
+        input{
+            margin-left: 10%;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        #busca2{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" placeholder="Buscar na tabela" id="busca">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="MinhaTabela">
+            <tr>
+                <td>Dimitri</td>
+                <td>Teixeira</td>
+                <td>dimitri@exemplo.com</td>
+            </tr>
+            <tr>
+                <td>Maria</td>
+                <td>da Silva</td>
+                <td>Maria@exemplo.com</td>
+            </tr>
+            <tr>
+                <td>Julia</td>
+                <td>Santos</td>
+                <td>july@teste.com</td>
+            </tr>
+            <tr>
+                <td>JavaScript</td>
+                <td>JQuery</td>
+                <td>dddd@teste.com</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <input type="text" id="busca2" placeholder="busca na lista">
+
+    <ul id="list"  style="margin-left: 10%;">
+        <li>Arroz</li>
+        <li>Feijão</li>
+        <li>Leite</li>
+        <li>Carne</li>
+    </ul>
+    
+    <script src="../js/jquery-3.6.0.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

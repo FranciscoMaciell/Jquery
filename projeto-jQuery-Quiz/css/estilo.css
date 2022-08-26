@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+}
+
+#quiz{
+    margin-top: 50px;
+}
+
+button{
+    width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bolder;
+}
+
+.resposta{
+    display: block;
+    margin: auto auto;
+    margin-bottom: 10px;
+}
+
+.resposta:hover{
+    background-color: rgb(156, 155, 155);
+}
+
+#confirm{
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+#confirm:hover{
+    background-color: rgb(6, 206, 6);
+    border: 1px solid black;
+    border-radius: 10px;
+}
