@@ -3,7 +3,7 @@ var qtdPerguntas=3;
 var perguntasFeitas=[];
 
 // PERGUNTAS DO JOGO
-const perguntas=[
+let perguntas=[
     // PERGUNTA 0
     {
         pergunta: "Qual dessas linguagens não é considerada uma linguagem de programação?",
@@ -43,6 +43,7 @@ function gerarPergunta(maxPerguntas){
         perguntasFeitas.push(aleatorio);
         var p_selecionada=perguntas[aleatorio].pergunta;
         $('#pergunta').html(p_selecionada);
+        $('#pergunta').attr('data-indice', aleatorio);
 
         /*
         var resp0=perguntas[aleatorio].respostas[0];
@@ -65,5 +66,87 @@ function gerarPergunta(maxPerguntas){
         for(var i=1; i<botões.length; i++){
             pai.append(botões.eq(Math.floor(Math.random()*botões.length)))
         }
+    }else{
+        console.log('A pergunta ja foi feita. Sorteando novamente...');
+        if(perguntasFeitas.length<qtdPerguntas+1){
+            return gerarPergunta(maxPerguntas);
+        }else{
+            console.log('Acabaram as perguntas');
+        }
     }
 }
+
+$(document).ready(function(){
+    $('.resposta').click(function(){
+        $('.resposta').each(function(){
+            if($(this).hasClass('selecionada')){
+                $(this).removeClass('selecionada');
+            }
+        })
+        $(this).addClass('selecionada');
+    })
+
+    $('#confirm').click(function(){
+        var indice=$('#pergunta').attr('data-indice');
+        var respCerta=perguntas[indice].correta;
+        $('.resposta').each(function(){
+            if($(this).hasClass('selecionada')){
+                var respEscolhida=$(this).attr('id');
+
+
+                if(respCerta==respEscolhida){
+                    console.log('acertou!!!');
+                    proximaPergunta();
+                }else{
+                    $(`#${respCerta}`).addClass('certa')
+                    $(`#${respEscolhida}`).removeClass('selecionada');
+                    $(`#${respEscolhida}`).addClass('errada');
+
+                    setTimeout(function(){
+                        //newGamer();
+                        gameOver();
+                    }, 4000);
+                }
+            }
+        })
+    })
+
+    $('#novoJogo').click(function(){
+        newGamer();
+    })
+
+    function resetBotões(){
+        $('.resposta').each(function(){
+            if($(this).hasClass('selecionada')){
+                $(this).removeClass('selecionada');
+            }
+
+            if($(this).hasClass('certa')){
+                $(this).removeClass('certa')
+            }
+
+            if($(this).hasClass('errada')){
+                $(this).removeClass('errada');
+            }
+        })
+    }
+    
+    function newGamer(){
+        perguntasFeitas=[];
+        resetBotões();
+        gerarPergunta(qtdPerguntas);
+        $('#quiz').removeClass('oculto');
+        $('#status').addClass('oculto');
+    }
+    
+    function proximaPergunta(){
+        resetBotões();
+        gerarPergunta(qtdPerguntas);
+    }
+
+    function gameOver(){
+        $('#quiz').addClass('oculto');
+        $('#status').removeClass('oculto')
+    }
+})
+
