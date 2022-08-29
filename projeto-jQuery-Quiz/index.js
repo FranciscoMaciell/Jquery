@@ -1,33 +1,90 @@
 /* VARIAVEIS DE CONTROLE DO NOSSO JOGO */
-var qtdPerguntas=3;
+var qtdPerguntas=13;
 var perguntasFeitas=[];
+let resp_ok=0;
+let resp_erro=0;
 
 // PERGUNTAS DO JOGO
 let perguntas=[
     // PERGUNTA 0
     {
-        pergunta: "Qual dessas linguagens não é considerada uma linguagem de programação?",
-        respostas: ['PHP', 'JavaScript', 'C++', 'HTML'],
-        correta: 'resp3'
+        pergunta: "A que grupo pertence o empresa Assaí Atacadista?",
+        respostas: ['Mergê', 'Boris', 'Casino', 'BoriSul'],
+        correta: 'resp2'
     },
     // PERGUNTA 1
     {
-        pergunta: "Em que ano o Brasil foi descoberto?",
-        respostas: ['1548', '1500', '1575', '1828'],
+        pergunta: "Trata-se da única empresa do segmento listada na Bolsa de Valores de São Paulo (B3) sob o ticker ______. Além disso, é negociada também na bolsa de _______ .",
+        respostas: ['ASSAI3, Nova York', 'ASAI3,  Nova York ', 'ASSAI4, Nova York', 'ASAI4, Nova York'],
         correta:'resp1'
     },
     // PERGUNTA 2
     {
-        pergunta: 'O que significa a sigla HTML?',
-        respostas: ['Hiper Tonto Maluco Legal', 'Hyper Text Markup Language', 'Hey Trade More Language', 'Hyper Text Mark Lang'],
-        correta: 'resp1'
+        pergunta: 'O Assaí une preço justo, variedade e qualidade para atender os pequenos e médios comerciantes e o _______.',
+        respostas: ['Mercado final', 'As metas finais', 'Conjunto final', 'Cliente final'],
+        correta: 'resp3'
     },
     //PERGUNTA 3
     {
-        pergunta: 'Quais dessas linguagens é considerada uma linguagem de marcação?',
-        respostas: ['HTML', 'PHP', 'JavaScript', 'C++'],
+        pergunta: 'Por loja, são comercializados mais de _______ mil itens, entre alimentos, bebidas, itens de higiene pessoal e limpeza, bazar, linha automotiva, linha pet e eletroportáteis, além de embalagens e descartáveis. <br>Escolha a opção mais proxima da correta',
+        respostas: ['9', '10', '5', '15'],
         correta:'resp0'
-    }
+    },
+    //PERGUNTA 4
+    {
+        pergunta: ' O cliente tem a opção de fazer sua compra pagando o preço de atacado ______________.',
+        respostas: ['ao adquirir volumes maiores de um mesmo item', 'Quando um cliente compra uma certa quantia em volumes variados', 'O Assaí é legal e dá desconto para qualquer valor', 'nenhuma das opções'],
+        correta:'resp0'
+    },
+    //PERGUNTA 5
+    {
+        pergunta: 'Acontecimento muito relevante para o Assaí em 2017',
+        respostas: ['O Assaí torna-se o maior SuperMercado do Brasil', 'Torna-se a maior marca no ramo atacadista sendo reconhecida mundialmente', 'Torna-se a maior marca do grupo onde entá inserida', 'nenhuma das opções'],
+        correta:'resp2'
+    },
+    // PERGUNTA 6
+    {
+        pergunta: 'Assaí em numeros: Lojas:______, Centros de distribuição:_______ e Escritórios Regionais:________',
+        respostas: ['210, 40, 40', '250, 50, 60', '230, 5, 6', '221, 12, 11'],
+        correta:'resp3'
+    },
+    // PERGUNTA 7
+    {
+        pergunta: 'O Assaí está raqueado como: ',
+        respostas: ['como o 1<sup>o</sup> maior varejista do Brasil', 'como o 2<sup>o</sup> maior varejista do Brasil', 'como o 3<sup>o</sup> maior varejista do Brasil', 'como o 4<sup>o</sup> maior varejista do Brasil'],
+        correta:'resp1'
+    },
+    // PERGUNTA 8
+    {
+        pergunta: 'Quando e onde nasceu o primeiro Assaí?',
+        respostas: ['1970, em São Paulo', '1974, em São Paulo', '1975, no Rio de Janeira', '1974, Rio de Janeiro'],
+        correta:'resp1'
+    },
+    // PERGUNTA 9
+    {
+        pergunta: 'O GPA adquire 60% da companhia, um marco para a entrada no segmento atacado de autosserviço, que apresentava fortes sinais de crescimento no país. <br>Qual o ano deste acontecimento',
+        respostas: ['ano 2000', 'ano de 2007', 'ano de 2008', 'ano de 2005'],
+        correta:'resp1'
+    }, 
+    // PERGUNTA 10
+    {
+        pergunta: 'Em que ano o Assaí chegou a Fortaleza?',
+        respostas: ['ano 2000', 'ano de 2007', 'ano de 2008', 'ano de 2005'],
+        correta:'resp2'
+    },
+    // PERGUNTA 11
+    {
+        pergunta: 'Buscando estruturar e otimizar os processos, o Assaí inaugura seu primeiro Centro de Distribuição, no estado: ',
+        respostas: ['Rio de Janeiro/RJ', 'Ipanema/RJ', 'São Paulo/SP', 'Osasco/SP'],
+        correta:'resp3'
+    },
+    //PERGUNTA 12
+    {
+        pergunta: 'A modernização das lojas, criando um novo formato caracterizado pela maior quantidade de produtos e melhor ambiente (que inclui estacionamento coberto, Wi-Fi, ar-condicionado e iluminação natural na loja).<br>Em que ano começaram a ocorrer essas reformas?',
+        respostas: ['ano 2010', 'ano de 2015', 'ano de 2012', 'ano de 2011'],
+        correta:'resp3'
+    },
+
 ]
 
 var qtdPerguntas=perguntas.length-1;
@@ -37,25 +94,12 @@ function gerarPergunta(maxPerguntas){
     // GERAR UM NUMERO ALEATORIO
     let aleatorio=(Math.random()*maxPerguntas).toFixed();
     aleatorio=Number(aleatorio);
-    console.log(`A perguta sorteada foi ${aleatorio}`)
 
     if(!perguntasFeitas.includes(aleatorio)){
         perguntasFeitas.push(aleatorio);
         var p_selecionada=perguntas[aleatorio].pergunta;
         $('#pergunta').html(p_selecionada);
         $('#pergunta').attr('data-indice', aleatorio);
-
-        /*
-        var resp0=perguntas[aleatorio].respostas[0];
-        var resp1=perguntas[aleatorio].respostas[1];
-        var resp2=perguntas[aleatorio].respostas[2];
-        var resp3=perguntas[aleatorio].respostas[3];
-
-        $('#resp0').html(resp0);
-        $('#resp1').html(resp1);
-        $('#resp2').html(resp2);
-        $('#resp3').html(resp3);
-        */
 
         for(var i=0; i<4; i++){
             $(`#resp${i}`).html(perguntas[aleatorio].respostas[i]);
@@ -67,23 +111,28 @@ function gerarPergunta(maxPerguntas){
             pai.append(botões.eq(Math.floor(Math.random()*botões.length)))
         }
     }else{
-        console.log('A pergunta ja foi feita. Sorteando novamente...');
         if(perguntasFeitas.length<qtdPerguntas+1){
             return gerarPergunta(maxPerguntas);
         }else{
-            console.log('Acabaram as perguntas');
+            $('#quiz').attr('data-status', 'travado');
+            $('#quiz').addClass('oculto');
+            $('#mensagem').html('Parabéns você venceu!!!')
+            $('#status').removeClass('oculto');
+            $('#status').addClass('venceu');
         }
     }
 }
 
 $(document).ready(function(){
     $('.resposta').click(function(){
-        $('.resposta').each(function(){
-            if($(this).hasClass('selecionada')){
-                $(this).removeClass('selecionada');
-            }
-        })
-        $(this).addClass('selecionada');
+        if($('#quiz').attr('data-status')!=='travado'){
+            $('.resposta').each(function(){
+                if($(this).hasClass('selecionada')){
+                    $(this).removeClass('selecionada');
+                }
+            }) 
+            $(this).addClass('selecionada');
+        }
     })
 
     $('#confirm').click(function(){
@@ -92,27 +141,33 @@ $(document).ready(function(){
         $('.resposta').each(function(){
             if($(this).hasClass('selecionada')){
                 var respEscolhida=$(this).attr('id');
-
-
                 if(respCerta==respEscolhida){
-                    console.log('acertou!!!');
                     proximaPergunta();
                 }else{
-                    $(`#${respCerta}`).addClass('certa')
-                    $(`#${respEscolhida}`).removeClass('selecionada');
-                    $(`#${respEscolhida}`).addClass('errada');
-
-                    setTimeout(function(){
-                        //newGamer();
+                    $('#confirm').addClass('oculto');
+                        $(`#${respCerta}`).addClass('certa');
+                        $(`#${respEscolhida}`).removeClass('selecionada');
+                        $(`#${respEscolhida}`).addClass('errada');
+                        setTimeout(function(){
+                            //newGamer();
+                            proximaPergunta();
+                            $('#confirm').removeClass('oculto');
+                        }, 4000);
                         gameOver();
-                    }, 4000);
                 }
             }
         })
     })
 
+    
+
     $('#novoJogo').click(function(){
         newGamer();
+    })
+
+    $('#avançar').click(function(){
+        $('#entrada').addClass('oculto');
+        $('#quiz').removeClass('oculto')
     })
 
     function resetBotões(){
@@ -132,11 +187,15 @@ $(document).ready(function(){
     }
     
     function newGamer(){
+        $('#quiz').attr('data-status', 'Ok');
+        $('#confirm').removeClass('oculto');
         perguntasFeitas=[];
         resetBotões();
         gerarPergunta(qtdPerguntas);
         $('#quiz').removeClass('oculto');
         $('#status').addClass('oculto');
+        resp_erro=0;
+        resp_ok=0;
     }
     
     function proximaPergunta(){
@@ -146,7 +205,9 @@ $(document).ready(function(){
 
     function gameOver(){
         $('#quiz').addClass('oculto');
-        $('#status').removeClass('oculto')
+        $('#mensagem').html('Game Over');
+        $('#status').removeClass('oculto');
+        $('#status').addClass('perdeu');
     }
 })
 

@@ -8,10 +8,46 @@ body{
     padding: 0px;
     margin: 0px;
     text-align: center;
+    background: blue;
+}
+
+header{
+    background: rgb(255, 160, 36);
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px black;
+    color: white;
+    margin-top: 10%;
+}
+
+#titulo{
+    padding-top: 70px;
+    font-size: 3em;
+    text-shadow: 2px 3px 5px black;
+}
+
+#avançar{
+    width: 100px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.418);
+}
+
+#avançar:hover{
+    background: rgb(182, 182, 221);
 }
 
 #quiz{
-    margin-top: 50px;
+    margin-top: 100px;
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    margin-top: 10%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px  black;
 }
 
 button{
@@ -27,6 +63,7 @@ button{
     margin: auto auto;
     margin-bottom: 10px;
     cursor: pointer;
+    font-size: 1em;
 }
 
 .resposta:hover{
@@ -74,7 +111,6 @@ button{
 
 #status{
     border: 1px solid black;
-    background-color: red;
     color: white;
     margin-top: 30px;
 }
@@ -85,4 +121,24 @@ button{
 
 .oculto{
     display: none;
+}
+
+.venceu{
+    background-color: green;
+    color: white;
+}
+
+.perdeu{
+    background-color: red;
+    color: white;
+}
+
+#correct{
+    margin: 20px;
+    text-align: left;
+}
+
+footer{
+    color: white;
+    margin: 10px;
 }
