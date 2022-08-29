@@ -1,11 +1,6 @@
-/* VARIAVEIS DE CONTROLE DO NOSSO JOGO */
-var qtdPerguntas=13;
-var perguntasFeitas=[];
-let resp_ok=0;
-let resp_erro=0;
+let perguntasFeitas=[];
 
-// PERGUNTAS DO JOGO
-let perguntas=[
+const perguntas=[
     // PERGUNTA 0
     {
         pergunta: "A que grupo pertence o empresa Assaí Atacadista?",
@@ -84,130 +79,113 @@ let perguntas=[
         respostas: ['ano 2010', 'ano de 2015', 'ano de 2012', 'ano de 2011'],
         correta:'resp3'
     },
-
 ]
 
-var qtdPerguntas=perguntas.length-1;
+let qtdPerguntas=perguntas.length-1;
 gerarPergunta(qtdPerguntas);
 
+$('.resposta').click(function(){
+    resetBotoes();
+    $(this).addClass('selecionada');
+})
+
+$('#confirm').click(function(){
+    var indice=$('#pergunta').attr('data-indice');
+    var respCerta=perguntas[indice].correta;
+
+    $('.resposta').each(function(){
+        if($(this).hasClass('selecionada')){
+            var respEscolhida=$(this).attr('id');
+
+            if(respCerta==respEscolhida){
+                proximaPergunta();
+            }else{
+                $(`#${respCerta}`).addClass('certa');
+                $(`#${respEscolhida}`).removeClass('selecionada');
+                $(`#${respEscolhida}`).addClass('errada');
+                $('#confirm').addClass('hide');
+
+                setTimeout(function(){
+                    gameOver();
+                },3000);
+            }
+        }
+    })
+})
+
+$('#newGamer').click(function(){
+    $('#quiz').removeClass('hide');
+    $('#status').addClass('hide');
+    newGame();
+})
+
+
+
+/* --- DESENVOLVIMENTO DE FUNÇÕES --- */
 function gerarPergunta(maxPerguntas){
-    // GERAR UM NUMERO ALEATORIO
     let aleatorio=(Math.random()*maxPerguntas).toFixed();
     aleatorio=Number(aleatorio);
-
     if(!perguntasFeitas.includes(aleatorio)){
         perguntasFeitas.push(aleatorio);
-        var p_selecionada=perguntas[aleatorio].pergunta;
-        $('#pergunta').html(p_selecionada);
-        $('#pergunta').attr('data-indice', aleatorio);
+        let p_selecionada=perguntas[aleatorio].pergunta;
+        $(document).ready(function(){
+            $('#pergunta').html(p_selecionada);
+            $('#pergunta').attr('data-indice', aleatorio);
+        })
 
         for(var i=0; i<4; i++){
-            $(`#resp${i}`).html(perguntas[aleatorio].respostas[i]);
+            $(`#resp${i}`).html(perguntas[aleatorio].respostas[i])
         }
 
         var pai=$('#respostas');
-        var botões=pai.children();
-        for(var i=1; i<botões.length; i++){
-            pai.append(botões.eq(Math.floor(Math.random()*botões.length)))
+        var botoes=pai.children();
+
+        for(var i=1; i<botoes.length; i++){
+            pai.append(botoes.eq(Math.floor(Math.random()*botoes.length)))
         }
     }else{
-        if(perguntasFeitas.length<qtdPerguntas+1){
-            return gerarPergunta(maxPerguntas);
+        console.log('A pergunta ja foi feita, sorteando novamente');
+        if(perguntasFeitas.length<qtdperguntas){
+            gerarPergunta(maxPerguntas);
         }else{
-            $('#quiz').attr('data-status', 'travado');
-            $('#quiz').addClass('oculto');
-            $('#mensagem').html('Parabéns você venceu!!!')
-            $('#status').removeClass('oculto');
-            $('#status').addClass('venceu');
+            console.log('Acabaram as perguntas')
         }
+        
     }
 }
 
-$(document).ready(function(){
-    $('.resposta').click(function(){
-        if($('#quiz').attr('data-status')!=='travado'){
-            $('.resposta').each(function(){
-                if($(this).hasClass('selecionada')){
-                    $(this).removeClass('selecionada');
-                }
-            }) 
-            $(this).addClass('selecionada');
+function proximaPergunta(){
+    gerarPergunta(qtdPerguntas);
+    resetBotoes();
+}
+
+function resetBotoes(){
+    $('.resposta').each(function(){
+        if($(this).hasClass('selecionada')){
+            $(this).removeClass('selecionada')
+        }
+
+        if($(this).hasClass('certa')){
+            $(this).removeClass('certa');
+        }
+
+        if($(this).hasClass('errada')){
+            $(this).removeClass('errada');
+        }
+
+        if($('#confirm').hasClass('hide')){
+            $('#confirm').removeClass('hide');
         }
     })
+}
 
-    $('#confirm').click(function(){
-        var indice=$('#pergunta').attr('data-indice');
-        var respCerta=perguntas[indice].correta;
-        $('.resposta').each(function(){
-            if($(this).hasClass('selecionada')){
-                var respEscolhida=$(this).attr('id');
-                if(respCerta==respEscolhida){
-                    proximaPergunta();
-                }else{
-                    $('#confirm').addClass('oculto');
-                        $(`#${respCerta}`).addClass('certa');
-                        $(`#${respEscolhida}`).removeClass('selecionada');
-                        $(`#${respEscolhida}`).addClass('errada');
-                        setTimeout(function(){
-                            //newGamer();
-                            proximaPergunta();
-                            $('#confirm').removeClass('oculto');
-                        }, 4000);
-                        gameOver();
-                }
-            }
-        })
-    })
+function newGame(){
+    perguntasFeitas=[];
+    resetBotoes();
+    gerarPergunta(qtdPerguntas);
+}
 
-    
-
-    $('#novoJogo').click(function(){
-        newGamer();
-    })
-
-    $('#avançar').click(function(){
-        $('#entrada').addClass('oculto');
-        $('#quiz').removeClass('oculto')
-    })
-
-    function resetBotões(){
-        $('.resposta').each(function(){
-            if($(this).hasClass('selecionada')){
-                $(this).removeClass('selecionada');
-            }
-
-            if($(this).hasClass('certa')){
-                $(this).removeClass('certa')
-            }
-
-            if($(this).hasClass('errada')){
-                $(this).removeClass('errada');
-            }
-        })
-    }
-    
-    function newGamer(){
-        $('#quiz').attr('data-status', 'Ok');
-        $('#confirm').removeClass('oculto');
-        perguntasFeitas=[];
-        resetBotões();
-        gerarPergunta(qtdPerguntas);
-        $('#quiz').removeClass('oculto');
-        $('#status').addClass('oculto');
-        resp_erro=0;
-        resp_ok=0;
-    }
-    
-    function proximaPergunta(){
-        resetBotões();
-        gerarPergunta(qtdPerguntas);
-    }
-
-    function gameOver(){
-        $('#quiz').addClass('oculto');
-        $('#mensagem').html('Game Over');
-        $('#status').removeClass('oculto');
-        $('#status').addClass('perdeu');
-    }
-})
-
+function gameOver(){
+    $('#quiz').addClass('hide');
+    $('#status').removeClass('hide');
+}
