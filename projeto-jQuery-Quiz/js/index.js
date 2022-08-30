@@ -82,6 +82,8 @@ const perguntas=[
 ]
 
 let qtdPerguntas=perguntas.length-1;
+var cntcerto=0;
+var cnterrado=0;
 gerarPergunta(qtdPerguntas);
 
 $('.resposta').click(function(){
@@ -98,19 +100,36 @@ $('#confirm').click(function(){
             var respEscolhida=$(this).attr('id');
 
             if(respCerta==respEscolhida){
+                cntcerto+=1;
                 proximaPergunta();
+                console.log(cntcerto);
+                if(cntcerto>=5){
+                    venceu();
+                }
             }else{
                 $(`#${respCerta}`).addClass('certa');
                 $(`#${respEscolhida}`).removeClass('selecionada');
                 $(`#${respEscolhida}`).addClass('errada');
                 $('#confirm').addClass('hide');
-
-                setTimeout(function(){
-                    gameOver();
-                },3000);
+                cnterrado+=1;
+                console.log(cnterrado);
+                if(cnterrado>=3){
+                    setTimeout(function(){
+                        gameOver();
+                    },2000);
+                }else{
+                    setTimeout(function(){
+                        proximaPergunta();
+                    },2000)
+                }
             }
         }
     })
+})
+
+$('#pros').click(function(){
+    $('#cabeca').addClass('hide');
+    $('#quiz').removeClass('hide');
 })
 
 $('#newGamer').click(function(){
@@ -119,7 +138,11 @@ $('#newGamer').click(function(){
     newGame();
 })
 
-
+$('#venceu').click(function(){
+    $('#quiz').removeClass('hide');
+    $('#win').addClass('hide');
+    newGame();
+})
 
 /* --- DESENVOLVIMENTO DE FUNÇÕES --- */
 function gerarPergunta(maxPerguntas){
@@ -145,7 +168,7 @@ function gerarPergunta(maxPerguntas){
         }
     }else{
         console.log('A pergunta ja foi feita, sorteando novamente');
-        if(perguntasFeitas.length<qtdperguntas){
+        if(perguntasFeitas.length<qtdPerguntas){
             gerarPergunta(maxPerguntas);
         }else{
             console.log('Acabaram as perguntas')
@@ -181,6 +204,8 @@ function resetBotoes(){
 
 function newGame(){
     perguntasFeitas=[];
+    cntcerto=0;
+    cnterrado=0;
     resetBotoes();
     gerarPergunta(qtdPerguntas);
 }
@@ -188,4 +213,13 @@ function newGame(){
 function gameOver(){
     $('#quiz').addClass('hide');
     $('#status').removeClass('hide');
+    $('#tot_acertos').append(cntcerto);
+    $('#tot_erros').append(cnterrado);
+}
+
+function venceu(){
+    $('#quiz').addClass('hide');
+    $('#win').removeClass('hide');
+    $('#tot_acertos').append(cntcerto);
+    $('#tot_erros').append(cnterrado);
 }

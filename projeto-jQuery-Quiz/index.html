@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-    <div id="quiz">
+    <header id="cabeca">
+        <h1 id="title">Assaí</h1>
+        <h2 id="subtitle">Quiz</h2>
+        <button id="pros">Prosseguir</button>
+    </header>
+    <div id="quiz" class="hide">
         <h2 id="pergunta">Aqui vai a pergunta</h2>
         <div id="respostas">
             <button id="resp0" class="resposta">Resposta 1</button>
@@ -19,10 +24,21 @@
         <br><br>
         <button id="confirm">Confirmar</button>
     </div>
+
+    <dir id="win" class="hide">
+        <h1>Você Venceu</h1>
+        <p id="tot_acertos">Total de acertos: </p>
+        <p id="tot_erros">Total de erros: </p>
+        <button id="venceu">Jogar Novamente</button>
+    </dir>
+    
     <div id="status" class="hide">
         <h1>GameOver</h1>
+        <p id="tot_acertos">Total de acertos: </p>
+        <p id="tot_erros">Total de erros: </p>
         <button id="newGamer">Novo Jogo</button>
     </div>
+    
     <footer id="rodaPe">
         &copyDesenvolvido por Francisco Maciel
     </footer>
