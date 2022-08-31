@@ -1,25 +1,35 @@
-$(document).ready(function(){
-    $('#btn-add').click(function(){
-       addTarefa();
+let cnt=0; 
+
+$(document).ready(function () {
+
+    let botao=$('#btn-add');
+    let inputText=$('#inputTarefa');
+    let Deletar=$('.item-botao');
+
+    botao.click(function () {
+        addTarefa();
     })
 
-    valorInput.keyup(function(event){
+    inputText.keyup(function(event){
         if(event.keyCode===13){
             event.preventDefault();
-            addTarefa();
+            addTarefa()
         }
     })
+
+
 })
 
 
 
 
 /* --- DESENVOLVIMENTO DE FUNÇÕES --- */
-function addTarefa(){
-    let valorInput=$('#inputTarefa').val();
-    if(valorInput!==""&&valorInput!==null&&valorInput!==undefined){
-        let novoItem=
-        `<div class="item">
+function addTarefa() {
+    let valorInput = $('#inputTarefa').val();
+    if (valorInput !== "" && valorInput !== null && valorInput !== undefined) {
+        ++cnt;
+        let novoItem =
+            `<div id="${cnt}"class="item">
             <div class="item-icone">
                 <i class="mdi mdi-circle-outline"></i>
             </div>
@@ -33,7 +43,17 @@ function addTarefa(){
 
         $('#areaLista').append(novoItem);
 
-        valorInput.val('');
-        valorInput.focus();
+        $('#inputTarefa').val('');
+        $('#inputTarefa').focus();
+
+        $('.delete').click(function(){
+            apaga($('.item').attr('id'))
+        })
     }
 }
+
+function apaga(id){
+    let apagar=id;
+    apagar.remove();
+}
+
