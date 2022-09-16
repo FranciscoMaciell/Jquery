@@ -1,7 +1,15 @@
 "use stricte";
 
-const objs1=document.getElementsByTagName('div');
-const objs2=[...document.getElementsByTagName('div')];
+// DECLARÇÕES DE VARIAVEIS
 
-console.log(objs1);
-console.log(objs2);
+let tit=document.getElementById('texto');
+let cxTexto=document.getElementById('idtexto');
+
+tit.style.color='blue';
+cxTexto.value='casa';
+
+tit.innerHTML='Curso de JavaScript';
+let paragrafo=document.getElementsByTagName('p');
+paragrafo[0].style.color='blue';
+document.write(paragrafo[2].innerHTML);
+
